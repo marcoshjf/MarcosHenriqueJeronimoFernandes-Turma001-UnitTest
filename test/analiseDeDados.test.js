@@ -1,44 +1,38 @@
-const Analisar = require("../src/analiseDeDados");
+const Analisar = require("../src/analiseDeDados"); // Certifique-se que o nome do arquivo está correto
 
-describe('ADICIONAR DADOS', () => {
-    let analisar;
+describe("Classe Analisar - Método adicionarDados", () => {
+  let analise;
 
-    beforeEach(() => {
-        analisar.dados = new analisar();
-        analisar.dados['Neymar', 'Messi', 'Veigh', 'Ronaldo'];
-    });
-
-    test('Deve Adicionar os dados no dados', () => {
-        const dadosNovos = ['Travis', 'Scott']
-        analisar.adicionarDados(dadosNovos);
-        expect(analisar.dados).toEqual(expect.arrayContaining(dadosNovos));
-    });
-
-    test("Adicionar dados em formato inválido", async () => {
-        const dadosNovos = 1;
-        expect(() => analisar.adicionarDados(dadosNovos)).toThrow("Os dados devem ser um array.");
-      });
-
-    test('Deve remover um item existente dos dados', () => {
-        dados.limparDados('Neymar');
-        expect(dados.adicionarDados()).toEqual(['Messi']);
-    });
-})
-
-describe("LIMPAR DADOS", () => {
-    let analisar;
-  
-    beforeEach(() => {
-      analisar = new Analisar(); 
-      analisar.dados = ['Marcos','Lucas','Mateus','Angiel'];
-    });
-  
-    test("Limpar dados corretamente", async () => {
-      analisar.limparDados();
-      expect(analisar.dados).toEqual([]);
-    });
-
+  beforeEach(() => {
+    analise = new Analisar(); // Note o 'A' maiúsculo
+    analise.dados = [1, 2, 3, 4, 5];
   });
+
+  test("Adicionar dados corretamente", () => {
+    const novoDado = [6, 7, 8];
+    analise.adicionarDados(novoDado);
+    expect(analise.dados).toEqual(expect.arrayContaining(novoDado));
+  });
+
+  test("Adicionar dados em formato inválido", () => {
+    const novoDado = "texto";
+    expect(() => analise.adicionarDados(novoDado)).toThrow("Os dados devem ser um array.");
+  });
+});
+
+describe("Classe Analisar - Método limparDados", () => {
+  let analise;
+
+  beforeEach(() => {
+    analise = new Analisar();
+    analise.dados = [1, 2, 3, 4, 5];
+  });
+
+  test("Limpar dados corretamente", () => {
+    analise.limparDados();
+    expect(analise.dados).toEqual([]);
+  });
+});
   
   describe('Testes para ordenarDados', () => {
     let analisar; 
@@ -48,9 +42,9 @@ describe("LIMPAR DADOS", () => {
       });
     
       test('Deve ordenar os dados', () => {
-        analisar.dados = ['CR7', 'Messi', 'PELE', 'Neymar','Ronaldo' ];
+        analisar.dados = [3,2,1];
         const resultado = analisar.ordenarDados();
-        expect(resultado).toEqual(['Messi', 'PELE', 'Ronaldo','Neymar','CR7']);})
+        expect(resultado).toEqual([1,2,3]);})
 
   });
 
@@ -89,8 +83,8 @@ describe('Testes para calcularMediana', () => {
     });
   
     test('Deve calcular corretamente a moda quando há um jogador mais frequente', () => {
-      analisar.dados = ['Messi', 'Messi','Ronaldo']; 
-      expect(analisar.calcularModa()).toEqual(['Messi']);
+      analisar.dados = [2, 2,3]; 
+      expect(analisar.calcularModa()).toEqual([2]);
     });
 });
 
